@@ -1,0 +1,54 @@
+﻿@model IEnumerable<EmployeeViewModel>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(Emp => Emp.Image)</th>
+            <th>@Html.DisplayNameFor(Emp => Emp.Name)</th>
+            <th>@Html.DisplayNameFor(Emp => Emp.Email)</th>
+            <th>@Html.DisplayNameFor(Emp => Emp.HireDate)</th>
+            <th>@Html.DisplayNameFor(Emp => Emp.Address)</th>
+
+            <th>Details</th>
+            <th>Update</th>
+            <th>Delete</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Files/Images/@item.ImageUrl" class="img-circle" height="40" width="40" alt="No Employee Image" />
+                </td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.HireDate.ToShortDateString()</td>
+                <td>@item.Address</td>
+
+
+
+                <td>
+                    <a class="btn btn-success" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa-eye"></i> Details
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Employee" asp-action="Update" asp-route-id="@item.Id">
+                        <i class="fa-edit"></i> Update
+
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@item.Id">
+                        <i class="fa-trash"></i> Delete
+
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

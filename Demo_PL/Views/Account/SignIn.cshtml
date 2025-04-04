@@ -1,0 +1,41 @@
+﻿@model SignInViewModel
+@{
+    ViewData["Title"] = "SignIn";
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+}
+
+<div class="main-agileinfo">
+	<div class="agileits-top">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<form asp-action="SignIn" asp-controller="Account">
+			<div class="wthree-text">
+				<input class="text email" type="email" asp-for="@Model.EmailAddress" placeholder="Email" required="">
+				<span asp-validation-for="@Model.EmailAddress" class="text-danger"></span>
+			</div>
+			<div class="wthree-text mb-2">
+				<input class="text" type="password" asp-for="@Model.Password" placeholder="Password" required="">
+				<span asp-validation-for="@Model.Password" class="text-danger"></span>
+			</div>
+			
+			<div class="wthree-text">
+				<label class="anim">
+					<input type="checkbox" asp-for="@Model.RememberMe" class="checkbox" required="">
+					<span>Remeber ME</span>
+				</label>
+				<div class="clear"> </div>
+			</div>
+			<input type="submit" value="SIGNIN">
+		</form>
+		<p>You Don't Have an Account? <a asp-action="SignUp">Registration Now!</a> </p>
+		<p><a asp-action="ForgetPassword">Forget Password?</a> </p>
+		<a asp-action="GoogleLogin"> Google Login </a>
+
+
+	</div>
+
+</div>
+
+@section Scripts{
+	<partial name="_ValidationScriptsPartial" />
+
+}

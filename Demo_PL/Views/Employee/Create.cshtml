@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<div class="row">
+    <div class="col-6">
+        <form asp-action="Create" asp-controller="Employee" enctype="multipart/form-data">
+            <partial name="PartialViews/CreateOrUpdatePartialView" />
+            
+            <input type="submit" title="Add" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-warning">Back To List</a>
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+

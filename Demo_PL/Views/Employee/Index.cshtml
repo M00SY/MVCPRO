@@ -1,0 +1,165 @@
+﻿@model IEnumerable<EmployeeViewModel>
+@{
+    ViewData["Title"] = "EmployeePage";
+    var departments = new SelectList(ViewBag.Department, "Id", "Name");
+}
+
+<h1>All Employee</h1>
+<br />
+<a asp-action="Create" class="btn btn-primary">Create New Employee</a>
+<br />
+
+<form class="my-3" asp-action="Index" asp-controller="Employee">
+    <div class="row">
+        <div class="col-sm-5">
+            <input id="searchName" placeholder="Search By Name" name="Name" class="form-control" />
+        </div>
+        <div class="col-sm-5 mb-2 ">
+            <input id="searchEmail" placeholder="Search By Email" name="Email" class="form-control"/>
+        </div>
+        <div class="col-sm-5 ">
+            <label name="DeptId" class="col-form-label"></label>
+            <select id="searchDept" name="DeptId" asp-items="departments" class="form-control">
+                <option>Select Department</option>
+            </select>
+        </div>
+        
+        <div class="col-sm-3">
+            <input type="submit" value="Search" class="btn btn-success btn-block" />
+        </div>
+    </div>
+</form>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(Emp => Emp.Image)</th>
+                <th>@Html.DisplayNameFor(Emp => Emp.Name)</th>
+                <th>@Html.DisplayNameFor(Emp => Emp.Email)</th>
+                <th>@Html.DisplayNameFor(Emp => Emp.HireDate)</th>
+                <th>@Html.DisplayNameFor(Emp => Emp.Address)</th>
+
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/Files/Images/@item.ImageUrl" class="img-circle" height="40" width="40" alt="No Employee Image" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.HireDate.ToShortDateString()</td>
+                    <td>@item.Address</td>
+
+
+
+                    <td>
+                        <a class="btn btn-success" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="fa-eye"></i> Details
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Employee" asp-action="Update" asp-route-id="@item.Id">
+                            <i class="fa-edit"></i> Update
+
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="fa-trash"></i> Delete
+
+                        </a>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert-warning">
+        <h3>No Employee Found!!</h3>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var searchEmail = $('#searchEmail');
+    var searchName = $('#searchName');
+    var searchDept = $('#searchDept');
+
+    const table = $('table');
+
+    searchName.on('keyup', function (event) {
+        var searchValue = searchName.val();
+        $.ajax({
+            url: '/employee/Search',
+            type: 'GET',
+            data: { Name: searchValue },
+            succes: function (result) {
+                table.html(result);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+
+        });
+
+
+    });
+
+    searchEmail.on('keyup', function (event) {
+        var searchValue = searchEmail.val();
+        $.ajax({
+            url: '/employee/Search',
+            type: 'GET',
+            data: { Email: searchValue },
+            succes: function (result) {
+                table.html(result);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+
+        });
+
+
+    });
+
+    searchDept.on('keyup', function (event) {
+        var searchValue = searchDept.val();
+        $.ajax({
+            url: '/employee/Search',
+            type: 'GET',
+            data: { DeptId: searchValue },
+            succes: function (result) {
+                table.html(result);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+
+        });
+
+
+    });
+
+
+
+</script>
+
+
+
+

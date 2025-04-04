@@ -1,0 +1,51 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h1>Employee Details</h1>
+<br />
+<br />
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <img src="~/Files/Images/@Model.ImageUrl" class="rounded" height="200" width="200" alt="Empty Image">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Name" class="col-form-label"></label>
+            <input asp-for="@Model.Name" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Email" class="col-form-label"></label>
+            <input asp-for="@Model.Email" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Address" class="col-form-label"></label>
+            <input asp-for="@Model.Address" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Salary" class="col-form-label"></label>
+            <input asp-for="@Model.Salary" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.HireDate" class="col-form-label"></label>
+            <input type="date" asp-for="@Model.HireDate" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.DepartmentId" class="col-form-label"></label>
+            <input asp-for="@Model.DepartmentId" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <input asp-for="@Model.IsActive" class="form-check-input" disabled/>
+            <label asp-for="@Model.IsActive" class="form-check-label" ></label>
+        </div>
+        <br />
+        <a class="btn btn-success" asp-action="Update" asp-route-id="@Model.Id">Edit</a> |
+        <a class="btn btn-light" asp-action="Index">Back To List</a>
+    </div>
+</div>
+
+
+
+
